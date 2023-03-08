@@ -51,6 +51,16 @@ public class Base {
 			driver.findElement(locator).clear();
 	  }
 
+	  
+	  	  
+		public String getText(String attribute) {
+	
+		return null;
+	}
+	  
+	  
+	    
+	  
 	  public String getText(WebElement element) {
 	  return element.getText();
 	  }

@@ -1,19 +1,12 @@
 package pagePom;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import basePom.Base;
+import basePom.Locator;
 
 
-public class LoginPage extends Base {
+public class LoginPage extends Base implements Locator {
 
-	By usuarioLocator = By.id("username");   
-	By passwordLocator = By.id("pwd");
-	By clicBtnIngresarLocator = By.xpath("/html/body/app-root/app-login/div/div[2]/div/button");
-	
-	By homePageLocator = By.xpath("/html/body/app-root/app-login/div/div[1]/div");
-	
-	
 	public LoginPage(WebDriver driver) {
 		super(driver);
 		
