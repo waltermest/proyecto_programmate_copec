@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.OutputType;
@@ -38,6 +39,12 @@ public class PlantaFecha_Test {
 		//Intancia Login + Seleccionar planta
 		seleccionarPlanta.login();
 	
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		Thread.sleep(2000);
+		driver.quit();
 	}
 	
 		//Validación de capturas de evidencias	

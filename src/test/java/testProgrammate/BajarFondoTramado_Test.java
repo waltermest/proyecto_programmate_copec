@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,6 +18,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import pagePom.NuevaPropuestaPage;
 import pagePom.BajarFondoTramadoPage;
+import pagePom.LimpiarGrillaProgramadaPage;
 import pagePom.PlantaFechaPage;
 
 public class BajarFondoTramado_Test {
@@ -44,6 +46,12 @@ public class BajarFondoTramado_Test {
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, Paths.get(SCREENSHOT_FOLDER, fileName + SCREENSHOT_FORMAT).toFile());
     }
+    
+	@After
+	public void tearDown() throws Exception {
+//		Thread.sleep(3000);
+//		driver.quit();
+	}
     
     @Test
     public void clickFondoTramado() throws InterruptedException, IOException {
@@ -77,18 +85,35 @@ public class BajarFondoTramado_Test {
         takeScreenshot(testName.getMethodName() + "- doble click fondo verde");
                 
         //Click dar de baja al fonde verde        
-        Thread.sleep(3000);
+        Thread.sleep(8000);
         var bajarPropuesta = new BajarFondoTramadoPage(driver);
         bajarPropuesta.clickBajarDespacho();
         
         
 //      Visualizar el fondo verde en no programado
-        Thread.sleep(5000);
+        Thread.sleep(8000);
         var visibleGrillaFondoVerde = new BajarFondoTramadoPage(driver);
         visibleGrillaFondoVerde.fondoBajaNoProgramado();       
         takeScreenshot(testName.getMethodName() + "- Baja fondo verde no programado");
         
 
+        ////Limpiar grilla programada////
+        
+        Thread.sleep(20000);
+        //Limpiar grilla programada      
+        var btnlimpiar = new LimpiarGrillaProgramadaPage(driver);
+        btnlimpiar.clickBotonLimpiar();
+        takeScreenshot(testName.getMethodName() + "- Popup de dar OK para limpiar grilla");  
+        
+        Thread.sleep(8000);
+        var btnOKlimpiar = new LimpiarGrillaProgramadaPage(driver);
+        btnOKlimpiar.clickOkLimpiar();
+               
+        Thread.sleep(12000);
+        //Presionar guardar para realizar los cambios
+        var btnguardar = new LimpiarGrillaProgramadaPage(driver);
+        btnguardar.clickBotonGuardar();
+        takeScreenshot(testName.getMethodName() + "- Grilla vacía programada"); 
        
     
     }

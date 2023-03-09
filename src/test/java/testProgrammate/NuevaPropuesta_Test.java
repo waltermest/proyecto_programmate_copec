@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import org.junit.rules.TestName;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import pagePom.LimpiarGrillaProgramadaPage;
 import pagePom.NuevaPropuestaPage;
 import pagePom.PlantaFechaPage;
 
@@ -44,6 +47,12 @@ public class NuevaPropuesta_Test {
         FileUtils.copyFile(scrFile, Paths.get(SCREENSHOT_FOLDER, fileName + SCREENSHOT_FORMAT).toFile());
     }
     
+	@After
+	public void tearDown() throws Exception {
+//		Thread.sleep(3000);
+//		driver.quit();
+	}
+    
     @Test
     public void FondoTramado() throws InterruptedException, IOException {
         seleccionarPlanta.DropdownSelecionaPlanta();
@@ -68,6 +77,26 @@ public class NuevaPropuesta_Test {
         var fondoverde = new NuevaPropuestaPage(driver);
         fondoverde.FondoVerde();
         takeScreenshot(testName.getMethodName() + "- fondo verde");
+        
+        
+        
+        ////Limpiar grilla programada////
+        
+        Thread.sleep(20000);
+        //Limpiar grilla programada      
+        var btnlimpiar = new LimpiarGrillaProgramadaPage(driver);
+        btnlimpiar.clickBotonLimpiar();
+        takeScreenshot(testName.getMethodName() + "- Popup de dar OK para limpiar grilla");  
+        
+        Thread.sleep(8000);
+        var btnOKlimpiar = new LimpiarGrillaProgramadaPage(driver);
+        btnOKlimpiar.clickOkLimpiar();
+               
+        Thread.sleep(12000);
+        //Presionar guardar para realizar los cambios
+        var btnguardar = new LimpiarGrillaProgramadaPage(driver);
+        btnguardar.clickBotonGuardar();
+        takeScreenshot(testName.getMethodName() + "- Grilla vacía programada"); 
         
     }
         

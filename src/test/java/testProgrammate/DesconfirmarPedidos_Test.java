@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -46,6 +47,12 @@ public class DesconfirmarPedidos_Test {
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, Paths.get(SCREENSHOT_FOLDER, fileName + SCREENSHOT_FORMAT).toFile());
     }
+    
+	@After
+	public void tearDown() throws Exception {
+		Thread.sleep(3000);
+		driver.quit();
+	}
     
     @Test
     public void clickBotonConfirmar() throws InterruptedException, IOException {

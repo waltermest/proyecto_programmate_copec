@@ -46,7 +46,8 @@ public class Login_Test {
 
 	@After
 	public void tearDown() throws Exception {
-//		driver.quit();
+		Thread.sleep(3000);
+		driver.quit();
 	}
 
 	@Test
